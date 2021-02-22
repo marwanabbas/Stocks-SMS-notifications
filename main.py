@@ -2,6 +2,9 @@ import requests
 from twilio.rest import Client
 
 SMS_FEATURE = True
+TARGET_PHONE_NUMBER = "your targeted phone number"
+TWILIO_PHONE_NUMBER = "your twilio phone number"
+
 STOCK = "TSLA"
 PERCENTAGE_CHANGE = 3
 
@@ -65,7 +68,7 @@ percentage = check_price_movement(yesterday_price, day_before_yesterday_price)
 if percentage > PERCENTAGE_CHANGE:
     print(f"{percentage}% change in {STOCK} stock price. Attempting to send a text-message now!")
     if SMS_FEATURE is True:
-        message = client.messages.create(to="5862447772", from_="+17122141194",
+        message = client.messages.create(to=TARGET_PHONE_NUMBER, from_=TWILIO_PHONE_NUMBER,
                                          body=f"{STOCK}: {percentage}%\n{top_articles[0]['description']}")
         print(message.status)
 else:
